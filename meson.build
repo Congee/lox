@@ -11,6 +11,7 @@ project(
     'warning_level=3',
     'werror=false',
     'cpp_args=-Og',
+    'cpp_debugstl=true',
   ],
 )
 
