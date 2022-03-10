@@ -1,8 +1,8 @@
 {
-  description = "cracking the coding interview";
+  description = "C++ implementation of lox from Crafting Interpreters";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
