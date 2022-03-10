@@ -32,17 +32,13 @@
                 # XXX: the order of include matters
                 pkgs.clang-tools
                 llvm.clang # clangd
+                llvm.libcxxabi
 
                 pkgs.gtest
                 pkgs.fmt
                 pkgs.tl-expected
               ] ++ lib.optional pkgs.stdenv.isLinux [ pkgs.mold ]
               ;
-
-              buildInputs = [
-                # stdlib for cpp
-                llvm.libcxx
-              ];
 
               CPATH = builtins.concatStringsSep ":" [
                 (lib.makeSearchPathOutput "dev" "include" [ llvm.libcxx ])
