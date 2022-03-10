@@ -16,7 +16,8 @@
 
         in
           {
-            devShell = pkgs.mkShell {
+            devShell = pkgs.stdenvNoCC.mkDerivation {
+              name = "shell";
               nativeBuildInputs = [
                 # builder
                 # p.gnumake
