@@ -37,20 +37,13 @@
                 pkgs.gtest
                 pkgs.fmt
                 pkgs.tl-expected
-              ] ++ lib.optional pkgs.stdenv.isLinux [ pkgs.mold ]
+              ] ++ lib.optional pkgs.stdenv.isLinux [ llvm.lld ]
               ;
 
               CPATH = builtins.concatStringsSep ":" [
                 (lib.makeSearchPathOutput "dev" "include" [ llvm.libcxx ])
                 (lib.makeSearchPath "resource-root/include" [ llvm.clang ])
               ];
-              shellHook = ''
-                # export CXX="${llvm.clang}/bin/clang++";
-                # export CC="${llvm.clang}/bin/clang";
-                export CXX=clang++
-                export CC=clang
-              '' + lib.optionalString pkgs.stdenv.isLinux "export LD=mold"
-              ;
             };
           }
     );
