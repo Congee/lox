@@ -13,16 +13,13 @@ project(
   ],
 )
 
-if host_machine.system() == 'darwin'
-  add_project_link_arguments(['-lc++abi'], language : 'cpp')
-endif
-
 fmt = dependency('fmt')  # it is too nice having have flake.nix
 expected = dependency('tl-expected', method : 'cmake', modules : ['tl::expected'])
+cxxabi = meson.get_compiler('cpp').find_library('c++abi')  # required on darwin
 
 executable(
   'lox',
   'main.cpp',
   install: false,
-  dependencies: [fmt, expected]
+  dependencies: [fmt, expected, cxxabi]
 )
