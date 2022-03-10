@@ -24,7 +24,8 @@ class Lox {
     auto tokens = lexer.scan_tokens();
     if (tokens) {
       for (auto tok : tokens.value()) {
-        std::puts(tok.to_string().c_str());
+        if (tok.type != Token::END)
+          fmt::print("{}\n", tok.to_string());
       }
     } else {
       fmt::print(stderr, tokens.error());

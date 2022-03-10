@@ -10,18 +10,19 @@ project(
     'c_std=c11',
     'warning_level=3',
     'werror=false',
-    'cpp_args=-Og',
+    'cpp_args=-Og -g',
     'cpp_debugstl=true',
   ],
 )
 
 fmt = dependency('fmt')  # it is too nice having have flake.nix
 expected = dependency('tl-expected', method : 'cmake', modules : ['tl::expected'])
-cxxabi = meson.get_compiler('cpp').find_library('c++abi')  # required on darwin
+cxxabi = host_machine.system() == 'darwin' ? meson.get_compiler('cpp').find_library('c++abi') : []  # required on darwin
+magic_enum = subproject('magic_enum').get_variable('magic_enum_dep')
 
 executable(
   'lox',
   'main.cpp',
   install: false,
-  dependencies: [fmt, expected, cxxabi]
+  dependencies: [fmt, expected, cxxabi, magic_enum]
 )

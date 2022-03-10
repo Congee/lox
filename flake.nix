@@ -44,6 +44,7 @@
                 (lib.makeSearchPathOutput "dev" "include" [ llvm.libcxx ])
                 (lib.makeSearchPath "resource-root/include" [ llvm.clang ])
               ];
+              LD_LIBRARY_PATH = lib.strings.makeLibraryPath [ pkgs.fmt ];
             };
           }
     );
