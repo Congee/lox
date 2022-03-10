@@ -8,10 +8,14 @@ project(
   default_options: [
     'cpp_std=c++20',
     'c_std=c11',
-    'warning_level=2',
-    'werror=true',
+    'warning_level=3',
+    'werror=false',
   ],
 )
+
+if host_machine.system() == 'darwin'
+  add_project_link_arguments(['-lc++abi'], language : 'cpp')
+endif
 
 fmt = dependency('fmt')  # it is too nice having have flake.nix
 expected = dependency('tl-expected', method : 'cmake', modules : ['tl::expected'])

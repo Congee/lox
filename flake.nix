@@ -27,7 +27,6 @@
                 pkgs.ninja
                 # debugger
                 llvm.lldb
-                pkgs.mold
 
                 # XXX: the order of include matters
                 pkgs.clang-tools
@@ -35,9 +34,9 @@
 
                 pkgs.gtest
                 pkgs.fmt
-                pkgs.abseil-cpp_202111
                 pkgs.tl-expected
-              ];
+              ] ++ lib.optional pkgs.stdenv.isLinux [ pkgs.mold ]
+              ;
 
               buildInputs = [
                 # stdlib for cpp
@@ -53,8 +52,8 @@
                 # export CC="${llvm.clang}/bin/clang";
                 export CXX=clang++
                 export CC=clang
-                export LD=mold
-              '';
+              '' + lib.optionalString pkgs.stdenv.isLinux "export LD=mold"
+              ;
             };
           }
     );
