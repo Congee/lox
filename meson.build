@@ -10,6 +10,7 @@ project(
     'c_std=c11',
     'warning_level=3',
     'werror=false',
+    'cpp_args=-Og',
   ],
 )
 
